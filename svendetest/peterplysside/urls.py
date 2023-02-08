@@ -4,5 +4,5 @@ import include
 from .views import *
 
 urlpatterns = [
-    path('', )
+    path('', index)
 ]
