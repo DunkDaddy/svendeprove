@@ -12,9 +12,17 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from . info import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+EMAIL_USE_TLS = EMAIL_USE_TLS
+EMAIL_HOST = EMAIL_HOST
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+EMAIL_PORT = EMAIL_PORT
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +34,7 @@ SECRET_KEY = 'django-insecure-+=dch+#=8kf5+9g!iiv6y9o&408kab-6t(25xj!8e)sn7bdkl_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.130.54.25', '127.0.0.1']
+ALLOWED_HOSTS = ['10.130.54.25', '127.0.0.1', '10.0.2.2']
 
 
 # Application definition
@@ -59,7 +67,7 @@ ROOT_URLCONF = 'svendetest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

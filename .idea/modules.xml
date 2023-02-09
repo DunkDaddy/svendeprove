@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../EmbeddedControllerAPI/.idea/EmbeddedControllerAPI.iml" filepath="$PROJECT_DIR$/../EmbeddedControllerAPI/.idea/EmbeddedControllerAPI.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/svendeprove.iml" filepath="$PROJECT_DIR$/.idea/svendeprove.iml" />
     </modules>
   </component>
