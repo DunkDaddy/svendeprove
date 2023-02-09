@@ -14,6 +14,7 @@ urlpatterns = [
     path('pgliste/', pointGrade_liste),
     path('permissionsliste/', permissions_liste),
     path('upliste/', up_liste),
+    path('liste/', liste),
 
     #opret data
     path('postnummercreate/', postNummer_create),

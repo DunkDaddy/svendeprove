@@ -15,6 +15,7 @@ class Person(models.Model):
     postnummer = models.ForeignKey(PostNummer, on_delete=models.CASCADE)
     point = models.IntegerField()
     cpr = models.IntegerField()
+    brugernavn = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
 
 

@@ -54,3 +54,10 @@ class Uddel_PermissionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Uddel_Permissions
         fields = '__all__'
+
+
+class BPID(serializers.ModelSerializer):
+    class Meta:
+        model = Person
+        fields = ['brugernavn', 'password']
+

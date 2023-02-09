@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 
 ############# PostNummer
 @api_view(['GET'])
-#@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def postNummer_liste(request):
     postnr = PostNummer.objects.all()
     serializer = PostNummerSerializer(postnr, many=True)
@@ -29,7 +29,7 @@ def postNummer_create(request):
 
 
 @api_view(['GET'])
-#@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def postNummer_view(request, pk):
     postnr = PostNummer.objects.get(postNr=pk)
     serializer = PostNummerSerializer(postnr, many=False)
@@ -456,3 +456,10 @@ def up_delete(request, pk):
 
     return Response('hj has been deleted')
 ############# Uddel_Permissions_Slut
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def liste(request):
+    up = Person.objects.all()
+    serializer = BPID(up, many=True)
+    return Response(serializer.data)
