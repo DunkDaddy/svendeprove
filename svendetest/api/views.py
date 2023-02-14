@@ -463,3 +463,12 @@ def liste(request):
     up = Person.objects.all()
     serializer = BPID(up, many=True)
     return Response(serializer.data)
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def cprliste(request):
+    up = Person.objects.all()
+    serializer = BCPR(up, many=True)
+    return Response(serializer.data)

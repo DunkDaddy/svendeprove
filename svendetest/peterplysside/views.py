@@ -14,6 +14,17 @@ from svendetest import settings
 
 # Create your views here.
 
+def test(request):
+    return render(request, "peterplysside/home.html")
+
+
+def test2(request):
+    return render(request, "peterplysside/home2.html")
+
+def test3(request):
+    return render(request, "peterplysside/home3.html")
+
+
 def home(request):
     return render(request, "peterplysside/index.html")
 

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'generalCSS.css' %}"/>
+</head>
+<body>
+<button>log out</button>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 4 100 100">
+    <path class="grey" d="M40,90
+             A40,40 0 1,1 60,90"
+          style="fill:none;"/>
+    <path class="purple" d="M40,90
+             A40,40 0 1,1 60,90"
+          style="fill:none;"/>
+         <text x="26" y="40" font-family="Verdana" font-size="10" fill="">you have</text>
+         <text x="39" y="50" font-family="Verdana" font-size="10" fill="">625</text>
+         <text x="34" y="60" font-family="Verdana" font-size="10" fill="">points</text>
+</svg>
+<button id="ReportB">report</button>
+<button id="StatsB">my stats</button>
+{% block buttons %}{% endblock %}
+</body>
+</html>

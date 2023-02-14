@@ -61,3 +61,9 @@ class BPID(serializers.ModelSerializer):
         model = Person
         fields = ['brugernavn', 'password']
 
+
+class BCPR(serializers.ModelSerializer):
+    class Meta:
+        model = Person
+        fields = ['brugernavn', 'cpr']
+

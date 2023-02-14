@@ -15,6 +15,7 @@ urlpatterns = [
     path('permissionsliste/', permissions_liste),
     path('upliste/', up_liste),
     path('liste/', liste),
+    path('cpr/', cprliste),
 
     #opret data
     path('postnummercreate/', postNummer_create),

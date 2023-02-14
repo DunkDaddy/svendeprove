@@ -11,6 +11,7 @@ class PostNummer(models.Model):
 class Person(models.Model):
     navn = models.CharField(max_length=255)
     adresse = models.CharField(max_length=255)
+    mail = models.CharField(max_length=255)
     tlf = models.IntegerField()
     postnummer = models.ForeignKey(PostNummer, on_delete=models.CASCADE)
     point = models.IntegerField()
