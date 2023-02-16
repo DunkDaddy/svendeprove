@@ -36,6 +36,7 @@ class RapporjunctionstSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rapport_junctions
         fields = '__all__'
+        depth = 1
 
 
 class PointGradeSerializer(serializers.ModelSerializer):
@@ -55,6 +56,11 @@ class Uddel_PermissionsSerializer(serializers.ModelSerializer):
         model = Uddel_Permissions
         fields = '__all__'
 
+
+class PS(serializers.ModelSerializer):
+    class Meta:
+        model = Person
+        fields = ['brugernavn', 'point']
 
 class BPID(serializers.ModelSerializer):
     class Meta:

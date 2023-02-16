@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from rest_framework.exceptions import NotFound
+
 from .models import *
 from .serializer import *
 from rest_framework.response import Response
@@ -82,6 +84,16 @@ def person_create(request):
 @permission_classes([IsAuthenticated])
 def person_view(request, pk):
     person = Person.objects.get(id=pk)
+    serializer = PersonSerializer(person, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def person_view_navn(request, pk):
+    person = Person.objects.get(brugernavn=pk)
+    if( not person ):
+        raise NotFound('person not found')
     serializer = PersonSerializer(person, many=False)
     return Response(serializer.data)
 
@@ -471,4 +483,13 @@ def liste(request):
 def cprliste(request):
     up = Person.objects.all()
     serializer = BCPR(up, many=True)
+    return Response(serializer.data)
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def appperson_view(request, pk):
+    person = Person.objects.get(brugernavn=pk)
+    serializer = BPID(person, many=False)
     return Response(serializer.data)

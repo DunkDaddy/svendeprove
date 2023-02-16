@@ -16,6 +16,7 @@ urlpatterns = [
     path('upliste/', up_liste),
     path('liste/', liste),
     path('cpr/', cprliste),
+    path('personapp/<str:pk>/', appperson_view),
 
     #opret data
     path('postnummercreate/', postNummer_create),
@@ -31,6 +32,7 @@ urlpatterns = [
     #se specifik data
     path('postnr/<int:pk>/', postNummer_view),
     path('person/<int:pk>/', person_view),
+    path('personappalt/<str:pk>/', person_view_navn),
     path('handling/<int:pk>/', handlinger_view),
     path('hj/<int:pk>/', hj_view),
     path('rapport/<int:pk>/', rapport_view),

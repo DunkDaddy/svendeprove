@@ -1,5 +1,31 @@
 {% extends 'peterplysside/home.html' %}
 {% block buttons %}
-<button id="SuperB">se andre points</button>
-<button ID="AdminB">alt</button>
+<button id="SuperB" data-toggle="modal" data-target="#Points">se andre points</button>
+<div class="modal" tabindex="-1" id="Points">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Signup Form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <table border="1">
+                {% for i in response %}
+                <ul>Navn: {{i.navn}} Points: {{i.point}} Postnummer:{{i.postnummer}}</ul>
+                {% endfor %}
+          </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<form id="AdminB" action="http://10.130.54.25:8000/admin/">
+    <input type="submit" value="SE ALT" />
+</form>
 {% endblock %}
