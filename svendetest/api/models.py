@@ -6,6 +6,7 @@ from django.db import models
 class PostNummer(models.Model):
     postNr = models.IntegerField(primary_key = True)
     byNavn = models.CharField(max_length=255, null=False)
+    
 
 
 class Person(models.Model):

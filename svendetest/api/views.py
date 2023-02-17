@@ -501,3 +501,4 @@ def setting(request):
     settings = Settings.objects.all()
     serializer = SettingSerializer(settings, many=True)
     return Response(serializer.data)
+

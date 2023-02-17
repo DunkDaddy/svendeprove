@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .forms import ReportForm
+from .forms import ReportForm, personForm
 from random import randint
 from django.http import JsonResponse
 import requests
@@ -37,14 +37,15 @@ def test3(request):
 
 
 def index(request):
+    form = personForm
     if request.method == "POST":
         if request.POST.get('password1') == request.POST.get('password2'):
             saveuser = User.objects.create_user(request.POST.get('username'), password=request.POST.get('password1'))
             saveuser.save()
-            return render(request, "peterplysside/index.html", {"form": UserCreationForm(), "info": "succes"})
+            return render(request, "peterplysside/index.html", {"form": form, "info": "succes"})
 
         else:
-            return render(request, "peterplysside/index.html", {"form": UserCreationForm(), "error": "the password are not matching"})
+            return render(request, "peterplysside/index.html", {"form": form, "error": "the password are not matching"})
     else:
-        return render(request, "peterplysside/index.html", {"form": UserCreationForm})
+        return render(request, "peterplysside/index.html", {"form": form})
 
