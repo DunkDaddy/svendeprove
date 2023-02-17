@@ -73,3 +73,8 @@ class BCPR(serializers.ModelSerializer):
         model = Person
         fields = ['brugernavn', 'cpr']
 
+
+class SettingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Settings
+        fields = '__all__'

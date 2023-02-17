@@ -20,6 +20,10 @@ class Person(models.Model):
     password = models.CharField(max_length=255)
 
 
+class Settings(models.Model):
+    pointThreshold = models.IntegerField(default=500)
+    startUpPoints = models.IntegerField(default=300)
+
 class Handlinger(models.Model):
     handling = models.TextField()
     credit = models.IntegerField()

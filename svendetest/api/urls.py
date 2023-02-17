@@ -17,6 +17,7 @@ urlpatterns = [
     path('liste/', liste),
     path('cpr/', cprliste),
     path('personapp/<str:pk>/', appperson_view),
+    path('settings/', setting),
 
     #opret data
     path('postnummercreate/', postNummer_create),

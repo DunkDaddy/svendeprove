@@ -493,3 +493,11 @@ def appperson_view(request, pk):
     person = Person.objects.get(brugernavn=pk)
     serializer = BPID(person, many=False)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def setting(request):
+    settings = Settings.objects.all()
+    serializer = SettingSerializer(settings, many=True)
+    return Response(serializer.data)
