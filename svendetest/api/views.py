@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.exceptions import NotFound
-
 from .models import *
 from .serializer import *
 from rest_framework.response import Response
@@ -294,6 +293,14 @@ def rj_create(request):
 @permission_classes([IsAuthenticated])
 def rj_view(request, pk):
     rj = Rapport_junctions.objects.get(id=pk)
+    serializer = RapporjunctionstSerializer(rj, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def rj_view2(request, pk):
+    rj = Rapport_junctions.objects.get(suspectId=pk)
     serializer = RapporjunctionstSerializer(rj, many=False)
     return Response(serializer.data)
 

@@ -6,7 +6,7 @@ from django.db import models
 class PostNummer(models.Model):
     postNr = models.IntegerField(primary_key = True)
     byNavn = models.CharField(max_length=255, null=False)
-    
+
 
 
 class Person(models.Model):
@@ -15,7 +15,7 @@ class Person(models.Model):
     mail = models.CharField(max_length=255)
     tlf = models.IntegerField()
     postnummer = models.ForeignKey(PostNummer, on_delete=models.CASCADE)
-    point = models.IntegerField()
+    point = models.IntegerField(default=300)
     cpr = models.CharField(max_length=10)
     brugernavn = models.CharField(max_length=255)
     password = models.CharField(max_length=255)

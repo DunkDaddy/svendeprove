@@ -41,6 +41,7 @@ urlpatterns = [
     path('pg/<int:pk>/', pointGrade_view),
     path('permissions/<int:pk>', permissions_view),
     path('up/<int:pk>/', up_view),
+    path('rjsuspect/<int:pk>/', rj_view2),
 
     #updater specifik data
     path('postnummerupdate/<int:pk>/', postNummer_update),

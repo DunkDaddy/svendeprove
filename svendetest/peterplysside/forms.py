@@ -7,7 +7,13 @@ class ReportForm(ModelForm):
         fields = ('beskrivelse',)
 
 
-class personForm(ModelForm):
+class signupForm(ModelForm):
     class Meta:
         model = Person
-        fields = ('brugernavn', 'password','adresse','mail','postnummer')
+        fields = ('navn','adresse','mail','tlf','postnummer','cpr','brugernavn','password')
+
+
+class loginForm(ModelForm):
+    class Meta:
+        model = Person
+        fields = ('brugernavn', 'password')

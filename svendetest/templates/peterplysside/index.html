@@ -9,13 +9,62 @@
 </head>
 <body>
     <center>
-<h1>Creating Model popup Signup Form</h1>
-<h3>with bootstrap</h3>
+<h1>Login Or Signup</h1>
     </center>
 <hr/>
-<center>
-    {{form}}
-</center>
+    <center>
+        <button data-toggle="modal" data-target="#signup">Signup</button>
+        <button data-toggle="modal" data-target="#login">Login</button>
+    </center>
+
+<div class="modal" tabindex="-1" id="signup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Signup Form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form method="post" action="">
+              {% csrf_token %}
+              {{signup.as_p}}
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Create User</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" tabindex="-1" id="login">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Signup Form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form method="post" action="">
+              {% csrf_token %}
+              {{login.as_p}}
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 </body>
 </html>
