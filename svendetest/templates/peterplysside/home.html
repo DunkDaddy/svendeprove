@@ -93,8 +93,10 @@ body {
       </div>
       <div class="modal-body">
           <table border="1">
-                {% for x in res %}
-                <ul>{{x.snitchId.navn}} har anklaget {{x.suspectId.navn}} med: <br>"{{x.rapportId.beskrivelse}}"</ul>
+                {% for report in res %}
+                    {% if person.id == report.snitchId.id %}
+                        <ul>{{report.snitchId.navn}} har anklaget {{report.suspectId.navn}} med: <br>"{{report.rapportId.beskrivelse}}"</ul>
+                    {% endif %}
                 {% endfor %}
           </table>
       </div>
@@ -111,7 +113,7 @@ body {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Signup Form</h5>
+        <h5 class="modal-title">rapport Form</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
