@@ -17,3 +17,9 @@ class loginForm(ModelForm):
     class Meta:
         model = Person
         fields = ('brugernavn', 'password')
+
+
+class passwordRecoveryForm(ModelForm):
+    class Meta:
+        model = Person
+        fields = ('mail', 'tlf', 'cpr', 'password')

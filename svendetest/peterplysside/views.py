@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import ReportForm, signupForm, loginForm
+from .forms import ReportForm, signupForm, loginForm, passwordRecoveryForm
 from django.http import JsonResponse
 import requests
 from api.models import *
@@ -9,6 +9,7 @@ from api.models import *
 # Create your views here.
 url1 = 'http://10.130.54.25:8000/data/rjliste/'
 url2 = 'http://10.130.54.25:8000/data/personlsite/'
+recover = 'http://10.130.54.25:8000/data/personupdate/1/'
 headers = {'X-Requested-With': 'XMLHttpRequest', 'Content-Type': 'application/json',
            'Authorization': 'Token 10221976ae7eebb749b62cb74de527cd6500697a'}
 #res = requests.get(url1, headers=headers).json()
@@ -41,6 +42,7 @@ def index(response):
         check = True
         signup = signupForm(response.POST)
         login = loginForm(response.POST)
+        recover = passwordRecoveryForm(response.POST)
         personlist = Person.objects.all()
         if signup.is_valid():
             for person in personlist:
@@ -73,9 +75,22 @@ def index(response):
                     else:
                         return render(response, "peterplysside/home.html", {"form": form, "res": res, "person": s, "purple": x})
 
+        if recover.is_valid():
+            for person in personlist:
+                if recover.cleaned_data['mail'] == person.mail and recover.cleaned_data['tlf'] == person.tlf and recover.cleaned_data['cpr'] == person.cpr:
+                    s = person
+                    s.password = recover.cleaned_data['password']
+                    s.save()
+                    signup = signupForm
+                    login = loginForm
+                    recover = passwordRecoveryForm
+                    return render(response, "peterplysside/index.html", {"signup": signup, "login": login, 'recover': recover})
+
+
     else:
         signup = signupForm
         login = loginForm
-    return render(response, "peterplysside/index.html", {"signup": signup, "login": login})
+        recover = passwordRecoveryForm
+    return render(response, "peterplysside/index.html", {"signup": signup, "login": login, 'recover': recover})
 
 
