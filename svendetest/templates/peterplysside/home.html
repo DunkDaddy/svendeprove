@@ -65,7 +65,7 @@ body {
 </head>
 <body>
 <form action="http://10.130.54.25:8000">
-    <input type="submit" value="logout" />
+    <input type="submit"  class="btn btn-danger" value="logout" />
 </form>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 4 100 100">
     <path class="grey" d="M40,90
@@ -78,8 +78,8 @@ body {
          <text x="39" y="50" font-family="Verdana" font-size="10" fill="">{{person.point}}</text>
          <text x="34" y="60" font-family="Verdana" font-size="10" fill="">points</text>
 </svg>
-<button id="ReportB" data-toggle="modal" data-target="#Rapport">Report</button>
-<button id="StatsB" data-toggle="modal" data-target="#Stats">My Reports</button>
+<button id="ReportB" data-toggle="modal" class="btn btn-dark" data-target="#Rapport">Report</button>
+<button id="StatsB" data-toggle="modal" class="btn btn-dark" data-target="#Stats">My Reports</button>
 
 
 <div class="modal" tabindex="-1" id="Stats">
@@ -119,14 +119,27 @@ body {
       </div>
       <div class="modal-body">
           <table border="1">
-              {{form}}
+              <form method="post" action="">
+                  {% csrf_token %}
+                  <h5>Vælg person du ønsker at rapportere</h5>
+                  <select name="suspect">
+                  {% for iperson in people %}
+                      {% if person.id == iperson.id %}
+                      {% else %}
+                      <option value="{{ iperson.id }}"> {{ iperson.navn }}</option>
+                      {% endif %}
+                  {% endfor %}
+                  </select>
+                  {{report}}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Make Report</button>
+                    </div>
+              </form>
           </table>
 
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+
     </div>
   </div>
 </div>

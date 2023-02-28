@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'peterplysside',
     'rest_framework',
     'rest_framework.authtoken',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
