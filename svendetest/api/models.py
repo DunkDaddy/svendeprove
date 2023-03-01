@@ -8,6 +8,9 @@ class PostNummer(models.Model):
     byNavn = models.CharField(max_length=255, null=False)
 
 
+class WorkSector(models.Model):
+    sector = models.CharField(max_length=255, null=False)
+
 
 class Person(models.Model):
     navn = models.CharField(max_length=255)
@@ -15,6 +18,7 @@ class Person(models.Model):
     mail = models.CharField(max_length=255)
     tlf = models.IntegerField()
     postnummer = models.ForeignKey(PostNummer, on_delete=models.CASCADE)
+    worksector = models.ForeignKey(WorkSector, on_delete=models.CASCADE)
     point = models.IntegerField(default=300)
     cpr = models.CharField(max_length=10)
     brugernavn = models.CharField(max_length=255)
@@ -36,6 +40,7 @@ class Handling_Junctions(models.Model):
 class Rapport(models.Model):
     beskrivelse = models.TextField()
     tidspunkt = models.DateTimeField(auto_now=True)
+    godtaget = models.BooleanField(default=False)
 
 class Rapport_junctions(models.Model):
     rapportId = models.ForeignKey(Rapport, on_delete=models.CASCADE)

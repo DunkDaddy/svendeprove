@@ -1,31 +1,70 @@
 {% extends 'peterplysside/home.html' %}
 {% block buttons %}
-<button id="SuperB" data-toggle="modal" data-target="#Points">se andre points</button>
+<button id="SuperB" data-toggle="modal" class="btn btn-dark" data-target="#Points">se andre points</button>
 <div class="modal" tabindex="-1" id="Points">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Signup Form</h5>
+        <h5 class="modal-title">Folks Point</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
           <table border="1">
-                {% for i in response %}
-                <ul>Navn: {{i.navn}} Points: {{i.point}} Postnummer:{{i.postnummer}}</ul>
+                {% for i in people %}
+                <ul>Navn: {{i.navn}} <br>Points: {{i.point}}</ul>
                 {% endfor %}
           </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 </div>
-<form id="AdminB" action="http://10.130.54.25:8000/admin/">
-    <input type="submit" value="SE ALT" />
-</form>
+
+
+<button id="GovermentB" data-toggle="modal" class="btn btn-dark" data-target="#Work">handlings håndtering</button>
+<div class="modal" tabindex="-1" id="Work">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Folks Point</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                <form method="POST" action="">
+                  {% csrf_token %}
+                    <h5>Vælg rapport herunder:</h5>
+                    <select name="handlingsraport">
+                        {% for report in res %}
+                            {% if person.id == report.snitchId.id %}
+                            <option value="{{ report.id }}">{{report.snitchId.navn}} har anklaget {{report.suspectId.navn}} med: <br>"{{report.rapportId.beskrivelse}}"</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+
+
+                    <h5>Vælg handling som passer på rapport herunder:</h5>
+                    <select name="handlingshaandtering">
+                      {% for h in handling %}
+                            <option value="{{ h.id }}"> {{ h.handling }} {{ h.credit }} point</option>
+                      {% endfor %}
+                    </select>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Accept</button>
+                    </div>
+                </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 {% endblock %}

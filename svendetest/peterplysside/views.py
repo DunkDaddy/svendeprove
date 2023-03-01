@@ -7,11 +7,12 @@ from api.models import *
 
 
 # Create your views here.
-url1 = 'http://10.130.54.25:8000/data/rjliste/'
-url2 = 'http://10.130.54.25:8000/data/personlsite/'
+rjListe = 'http://10.130.54.25:8000/data/rjliste/'
+personListe = 'http://10.130.54.25:8000/data/personlsite/'
 recover = 'http://10.130.54.25:8000/data/personupdate/1/'
+govermentHandling = 'http://10.130.54.25:8000/data/handlingsliste/'
 headers = {'X-Requested-With': 'XMLHttpRequest', 'Content-Type': 'application/json',
-           'Authorization': 'Token 10221976ae7eebb749b62cb74de527cd6500697a'}
+           'Authorization': 'Token 2183c1ad82ed9ec825dab900e3d78378b3c61f5e'}
 highprofile = False
 
 #res = requests.get(url1, headers=headers).json()
@@ -20,7 +21,7 @@ highprofile = False
 
 
 #def test(response):
-#    res = requests.get(url1, headers=headers).json()
+#    res = requests.get(rjListe, headers=headers).json()
 #    form = ReportForm
 #    return render(response, "peterplysside/home.html", {"form": form, "res": res})
 
@@ -61,7 +62,7 @@ def index(response):
                             check = False
                     if check == True:
                         s.save()
-                    res = requests.get(url1, headers=headers).json()
+                    res = requests.get(rjListe, headers=headers).json()
                     report = ReportForm
                     x = 233 - (s.point / 3 - 1)
                     return render(response, "peterplysside/home.html", {"report": report, "res": res, "person": s, "purple": x})
@@ -70,12 +71,16 @@ def index(response):
             for person in personlist:
                 if login.cleaned_data['brugernavn'] == person.brugernavn and login.cleaned_data['password']:
                     s = person
-                    res = requests.get(url1, headers=headers).json()
+                    res = requests.get(rjListe, headers=headers).json()
                     report = ReportForm
                     x = 233 - (s.point / 3 - 1)
                     currentuser = s
-                    if s.point > 500:
-                        res2 = requests.get(url2, headers=headers).json()
+                    res2 = requests.get(personListe, headers=headers).json()
+                    govermentsector = WorkSector.objects.get(id=1)
+                    if s.worksector == govermentsector:
+                        res3 = requests.get(govermentHandling, headers=headers).json()
+                        return render(response, "peterplysside/home3.html", {"report": report, "res": res, "person": s, "people": res2, "purple": x,"handling": res3})
+                    elif s.point > 500:
                         highprofile = True
                         return render(response, "peterplysside/home2.html", {"report": report, "res": res, "person": s, "people": res2, "purple": x})
                     else:
@@ -102,22 +107,33 @@ def index(response):
             rJunction = Rapport_junctions(rapportId=reportform, snitchId=currentuser, suspectId=suspect)
             rJunction.save()
             s = currentuser
-            res = requests.get(url1, headers=headers).json()
+            res = requests.get(rjListe, headers=headers).json()
             report = ReportForm
             x = 233 - (s.point / 3 - 1)
-            if s.point > 500:
-                res2 = requests.get(url2, headers=headers).json()
+            res2 = requests.get(personListe, headers=headers).json()
+            govermentsector = WorkSector.objects.get(id=1)
+            if s.worksector == govermentsector:
+                res3 = requests.get(govermentHandling, headers=headers).json()
+                return render(response, "peterplysside/home3.html",{"report": report, "res": res, "person": s, "people": res2, "purple": x, "handling": res3})
+            elif s.point > 500:
                 return render(response, "peterplysside/home2.html",{"report": report, "res": res, "person": s, "people": res2, "purple": x})
             else:
                 return render(response, "peterplysside/home.html",{"report": report, "res": res, "person": s, "purple": x})
 
+    if response.method == "POST":
+        x = response.POST.get('handlingsraport', False)
+        rJunction = Rapport_junctions.objects.get(id=x)
+        rapport = Rapport.objects.get(id=rJunction.rapportId.id)
+        rapport.godtaget = True
+        rapport.save()
 
-
-
-
-
-
-
+        s = currentuser
+        res2 = requests.get(personListe, headers=headers).json()
+        res3 = requests.get(govermentHandling, headers=headers).json()
+        res = requests.get(rjListe, headers=headers).json()
+        report = ReportForm
+        x = 233 - (s.point / 3 - 1)
+        return render(response, "peterplysside/home3.html", {"report": report, "res": res, "person": s, "people": res2, "purple": x, "handling": res3})
 
     else:
         signup = signupForm
@@ -125,5 +141,4 @@ def index(response):
         recover = passwordRecoveryForm
         currentuser = ""
     return render(response, "peterplysside/index.html", {"signup": signup, "login": login, 'recover': recover})
-
 
