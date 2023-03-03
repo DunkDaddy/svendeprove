@@ -15,30 +15,6 @@ headers = {'X-Requested-With': 'XMLHttpRequest', 'Content-Type': 'application/js
            'Authorization': 'Token 2183c1ad82ed9ec825dab900e3d78378b3c61f5e'}
 highprofile = False
 
-#res = requests.get(url1, headers=headers).json()
-#res2 = requests.get(url2, headers=headers).json()
-#form = ReportForm
-
-
-#def test(response):
-#    res = requests.get(rjListe, headers=headers).json()
-#    form = ReportForm
-#    return render(response, "peterplysside/home.html", {"form": form, "res": res})
-
-
-#def test2(response):
-#    res = requests.get(url1, headers=headers).json()
-#    res2 = requests.get(url2, headers=headers).json()
-#    form = ReportForm
-#    return render(response, "peterplysside/home2.html", {"form": form, "response": res2, "res": res})
-
-
-#def test3(response):
-#    res = requests.get(url1, headers=headers).json()
-#    res2 = requests.get(url2, headers=headers).json()
-#    form = ReportForm
-#    return render(response, "peterplysside/home3.html", {"form": form, "response": res2, "res": res})
-
 currentuser = ""
 def index(response):
     if response.method == "POST":
@@ -126,7 +102,12 @@ def index(response):
         rapport = Rapport.objects.get(id=rJunction.rapportId.id)
         rapport.godtaget = True
         rapport.save()
-
+        y = response.POST.get('handlingshaandtering', False)
+        handling = Handlinger.objects.get(id=y)
+        badCitizen = Person.objects.get(id=rJunction.suspectId.id)
+        newscore = badCitizen.point + handling.credit
+        badCitizen.point = newscore
+        badCitizen.save()
         s = currentuser
         res2 = requests.get(personListe, headers=headers).json()
         res3 = requests.get(govermentHandling, headers=headers).json()

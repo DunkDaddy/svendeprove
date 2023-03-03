@@ -33,7 +33,7 @@ urlpatterns = [
     #se specifik data
     path('postnr/<int:pk>/', postNummer_view),
     path('person/<int:pk>/', person_view),
-    path('personappalt/<str:pk>/', person_view_navn),
+    path('personappalt/<str:pk>/', appperson_view),
     path('handling/<int:pk>/', handlinger_view),
     path('hj/<int:pk>/', hj_view),
     path('rapport/<int:pk>/', rapport_view),
