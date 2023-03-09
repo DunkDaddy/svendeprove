@@ -498,7 +498,7 @@ def cprliste(request):
 @permission_classes([IsAuthenticated])
 def appperson_view(request, pk):
     person = Person.objects.get(brugernavn=pk)
-    serializer = BPID(person, many=False)
+    serializer = PersonSerializer(person, many=False)
     return Response(serializer.data)
 
 
