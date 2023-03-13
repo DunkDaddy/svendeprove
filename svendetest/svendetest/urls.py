@@ -21,3 +21,6 @@ urlpatterns = [
     path("data/", include('api.urls')),
     path("", include('peterplysside.urls')),
 ]
+
+handler404 = "peterplysside.views.handling_404"
+handler500 = "api.views.handling_500"

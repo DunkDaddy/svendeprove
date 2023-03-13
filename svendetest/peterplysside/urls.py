@@ -9,3 +9,4 @@ urlpatterns = [
     #path('3', test3, name='home3'),
     path('', index, name='index'),
 ]
+

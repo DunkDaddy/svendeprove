@@ -7,6 +7,10 @@ from api.models import *
 
 
 # Create your views here.
+
+
+
+
 rjListe = 'http://10.130.54.25:8000/data/rjliste/'
 personListe = 'http://10.130.54.25:8000/data/personlsite/'
 recover = 'http://10.130.54.25:8000/data/personupdate/1/'
@@ -16,6 +20,14 @@ headers = {'X-Requested-With': 'XMLHttpRequest', 'Content-Type': 'application/js
 highprofile = False
 
 currentuser = ""
+
+
+def handling_404(response, exception):
+    context = {}
+    return render(response, "peterplysside/fejl404.html", context)
+
+
+
 def index(response):
     if response.method == "POST":
         global currentuser;

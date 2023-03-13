@@ -9,6 +9,10 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 
+def handling_500(response):
+    context = {}
+    return render(response,"peterplysside/fejl500.html", context)
+
 ############# PostNummer
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
